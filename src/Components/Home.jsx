@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 
-
+// Slides
 import slide1 from "../assets/car1.png";
 import slide2 from "../assets/car2.png";
 import slide3 from "../assets/car3.png";
- 
+
+// Client logos
 import c1 from "../assets/P1.jpg";
 import c2 from "../assets/P2.png";
 import c3 from "../assets/P3.png";
@@ -20,7 +21,7 @@ import c10 from "../assets/P10.png";
 import c11 from "../assets/P11.jpg";
 import c12 from "../assets/P12.png";
 
-
+// Certificates
 import cert1 from "../assets/l1.jpg";
 import cert2 from "../assets/l2.png";
 import cert3 from "../assets/l3.png";
@@ -33,21 +34,14 @@ import cert9 from "../assets/l9.png";
 import cert10 from "../assets/l10.png";
 import cert11 from "../assets/l11.png";
 
-
-
-
-
-
-
-
-
 const slides = [
   {
     image: slide1,
     title: "Trusted Telecom & IT Solutions",
-    description:"Over 20 years delivering top-tier Telecom, ELV, and IT Networking services in Qatar."
+    description:
+      "Over 20 years delivering top-tier Telecom, ELV, and IT Networking services in Qatar.",
   },
-{
+  {
     image: slide2,
     title: "Certified & Approved Contractor",
     description:
@@ -55,83 +49,88 @@ const slides = [
   },
   {
     image: slide3,
-    title: " Innovation & Excellence",
+    title: "Innovation & Excellence",
     description:
       "Constantly improving, providing unique solutions, and leading with professional expertise.",
   },
 ];
 
-
-const clientLogos = [
-  c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12,
-];
+const clientLogos = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12];
 
 const certificates = [
-  cert1,
-  cert2,
-  cert3,
-  cert4,
-  cert5,
-  cert6,
-  cert7,
-  cert8,
-  cert9,
-  cert10,
-  cert11,
-  
+  cert1, cert2, cert3, cert4, cert5, cert6, cert7, cert8, cert9, cert10, cert11,
 ];
-
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Auto-slide every 5s
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, []);
 
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <div className="home-wrapper">
-      {/* ===== NAVBAR COVER BAR ===== */}
+      {/* NAVBAR SPACER */}
       <div className="navbar-spacer" />
 
-      {/* ================= HERO SLIDER ================= */}
+      {/* ===== HERO CAROUSEL ===== */}
       <section className="hero-carousel">
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`carousel-slide ${
-              index === currentSlide ? "active" : ""
-            }`}
+            className={`carousel-slide ${index === currentSlide ? "active" : ""}`}
             style={{ backgroundImage: `url(${slide.image})` }}
           />
+          
         ))}
 
-        {/* ===== CONTENT OVERLAY ===== */}
-        
+        {/* CONTENT OVERLAY */}
         <div className="carousel-overlay">
           <div className="carousel-content" key={currentSlide}>
-            <h1 className="carousel-title">
-              {slides[currentSlide].title}
-            </h1>
-
-            <p className="carousel-description">
-              {slides[currentSlide].description}
-            </p>
-
+            <h1 className="carousel-title">{slides[currentSlide].title}</h1>
+            <p className="carousel-description">{slides[currentSlide].description}</p>
             <Link to="/About" className="explore-btn">
               Explore More
             </Link>
           </div>
         </div>
+        
+        {/* 3. LEFT ARROW */}
+             <button className="carousel-arrow left" onClick={prevSlide} />
 
-    </section>
+              
 
+            {/* 4. RIGHT ARROW */}
+            <button className="carousel-arrow right" onClick={nextSlide} />
+             
 
-     
+            {/* 5. Dots */}
+            <div className="carousel-dots">
+              {slides.map((_, i) => (
+                <span
+                  key={i}
+                  className={`dot ${i === currentSlide ? "active" : ""}`}
+                  onClick={() => setCurrentSlide(i)}
+                />
+              ))}
+            </div>
+
+          </section>
+        
+      
+
 {/* ======================== OUR SERVICES (CORPORATE) ======================== */}
 <section className="corp-services">
   <div className="corp-services-header">
@@ -223,7 +222,8 @@ const Home = () => {
     {/* Project 1 */}
     <div className="project-card">
       <img
-        src="https://images.unsplash.com/photo-1581091870627-3d4c8a1d2c2b"
+        src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f"
+
         alt="Telecom Project"
       />
       <div className="project-overlay">

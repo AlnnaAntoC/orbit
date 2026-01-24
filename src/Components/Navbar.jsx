@@ -26,6 +26,12 @@ const Navbar = () => {
       }
     }, 300);
   };
+  const scrollToProjectsSection = (id) => {
+  navigate("/projects");
+  setTimeout(() => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  }, 300);
+};
 
   return (
     <nav className="navbar">
@@ -52,8 +58,8 @@ const Navbar = () => {
           <button className="dropdown-btn">Projects ▾</button>
           {openProjects && (
             <div className="dropdown-menu">
-              <button onClick={() => scrollToSection("proj")}>Projects</button>
-              <button onClick={() => scrollToSection("gall")}>Gallery</button>
+              <button onClick={() => scrollToProjectsSection("proj")}>Projects</button>
+              <button onClick={() => scrollToProjectsSection("gall")}>Gallery</button>
             </div>
           )}
         </div>
