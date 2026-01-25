@@ -1,5 +1,6 @@
 {
   "name": "my-react-app",
+  "homepage": "https://www.test.orbitqa.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

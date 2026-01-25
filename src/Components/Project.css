@@ -287,3 +287,10 @@
   
   .project-tabs-container { gap: 10px; }
 }
+
+@media (max-width: 768px) {
+  .projects-grid {
+    justify-content: center;
+  }
+}
+
